@@ -1,3 +1,5 @@
+Class = require 'lib/30log'
+
 require 'player'
 require 'world/init'
 require 'npc/init'
@@ -37,22 +39,9 @@ function drawing_world(room,x,y,room_map)
 	-- Setting colors
 	local wall = {78,136,173}
 	
-	local unit = room[y][x]
-	if unit == 2 then
-		love.graphics.setColor(love.math.colorFromBytes(wall))
-		love.graphics.print('#', x * Game.scale, y * Game.scale)
-	elseif unit == 0 then
-		love.graphics.setColor(1,1,1,0.3)
-		love.graphics.print('.', x * Game.scale, y * Game.scale)
-	elseif unit == 3 then
-		if (y == 1 or y == 6) then
-			love.graphics.setColor(love.math.colorFromBytes(wall))
-			love.graphics.print('-', x * Game.scale, y * Game.scale)
-		else
-			love.graphics.setColor(love.math.colorFromBytes(wall))
-			love.graphics.print('|', x * Game.scale, y * Game.scale)
-		end
-	end
+	
+	-- Draw the current Room
+	World.world[Game.currentRoomY][Game.currentRoomX]:draw()
 
 	-- Draw the player
 	Player:draw()

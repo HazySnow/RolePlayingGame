@@ -3,6 +3,7 @@ Player = {}
 function Player:load()
 	self.x = 4
 	self.y = 3
+	self.interacting = false
 end
 
 function Player:update(dt)
@@ -34,23 +35,28 @@ end
 
 function Player:keypressed(key)
 	-- Get the current room
-	local current_room = World.world[Game.currentRoomY][Game.currentRoomX].room
+	local current_room = World.world[Game.currentRoomY][Game.currentRoomX].layout
 	local current_room_width, current_room_height = World.world[Game.currentRoomY][Game.currentRoomX].width, World.world[Game.currentRoomY][Game.currentRoomX].height
 	local moveX, moveY
 
-	if (key == 'd') then
-		moveX = 1
-	elseif (key == 'a') then
-		moveX = -1
+	if self.interacting == false then
+		if (key == 'd') then
+			moveX = 1
+		elseif (key == 'a') then
+			moveX = -1
+		else
+			moveX = 0
+		end
+
+		if (key == 'w') then
+			moveY = -1
+		elseif (key == 's') then
+			moveY = 1
+		else
+			moveY = 0
+		end
 	else
 		moveX = 0
-	end
-
-	if (key == 'w') then
-		moveY = -1
-	elseif (key == 's') then
-		moveY = 1
-	else
 		moveY = 0
 	end
 
@@ -81,6 +87,30 @@ function Player:keypressed(key)
 			self:door_transition(current_room_width, current_room_height , moveX, moveY)
 		elseif (moving_to == 0) then
 			self.y = self.y + moveY
+		end
+	end
+
+	-- Player interact
+	if key == 'q' then
+		-- Interact with any npc one tile away
+
+
+		local npc = World.world[Game.currentRoomY][Game.currentRoomX].npc
+
+		for i,v in ipairs(npc) do
+			local to_left = (v.x == self.x - 1) and (v.y == self.y)
+			local to_right = (v.x == self.x + 1) and (v.y == self.y)
+			local to_up = (v.y == self.y - 1) and (v.x == self.x)
+			local to_down = (v.y == self.y + 1) and (v.x == self.x)
+			if to_left or to_right or to_up or to_down then
+				if self.interacting == false then
+					v:interact()
+					self.interacting = true
+				else
+					v:interact()
+					self.interacting = false
+				end
+			end
 		end
 	end
 	
