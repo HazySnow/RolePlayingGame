@@ -1,27 +1,12 @@
 require 'player'
-require 'world/room_1'
-require 'world/room_2'
+require 'world/init'
 
 Game = {}
 
 function love.load()
 	love.graphics.setDefaultFilter("nearest", "nearest")
-	Room_1:load()
-	Room_2:load()
-
-	Game.room_3 = {
-		{2,2,3,3,2,2},
-		{2,0,0,0,0,2},
-		{2,0,0,0,0,2},
-		{2,0,0,0,0,2},
-		{2,0,0,0,0,2},
-		{2,2,2,2,2,2}
-	}
+	World:load()
 	
-	Game.world = {
-		{Room_2, Room_1},
-		{Game.room_3}
-	}
 	Game.currentRoomX = 2
 	Game.currentRoomY = 1
 	Game.scale = 15
@@ -34,7 +19,7 @@ end
 function love.draw()
 
 	-- Choosing the current room
-	local room = Game.world[Game.currentRoomY][Game.currentRoomX]
+	local room = World.world[Game.currentRoomY][Game.currentRoomX]
 	local room_layout = room.room
 	local width, height = room.width, room.height
 
@@ -66,5 +51,9 @@ function drawing_world(room,x,y)
 		end
 	end
 
+	-- Draw the player
 	Player:draw()
+
+
+
 end
