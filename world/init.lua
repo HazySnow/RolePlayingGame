@@ -1,4 +1,3 @@
-require 'npc/init'
 require 'world/room_1'
 require 'world/room_2'
 require 'world/room_3'
@@ -14,5 +13,4 @@ function World:load()
 		{Room_2, Room_1},
 		{Room_3}
 	}
-	
 end

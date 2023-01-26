@@ -1,3 +1,6 @@
+require 'npc/guard'
+require 'npc/merchant'
+
 Room_1 = {}
 
 function Room_1:load()
@@ -11,5 +14,9 @@ function Room_1:load()
 	}
 	self.width = 6
 	self.height = 6
-	self.npc_list = {{1,2}}
+	self.npc = {Guard, Merchant}
+
+	for i,v in ipairs(self.npc) do
+		self.room[v.y][v.x] = 4
+	end
 end

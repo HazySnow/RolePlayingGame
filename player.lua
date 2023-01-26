@@ -20,7 +20,7 @@ function Player:door_transition(room_width, room_height, xvel, yvel)
 		self.x = 2
 	elseif (xvel == -1) then
 		Game.currentRoomX = Game.currentRoomX - 1
-		self.x = room_width + 1
+		self.x = room_width - 1
 	end
 
 	if (yvel == 1) then

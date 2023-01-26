@@ -1,10 +1,10 @@
 General = {}
 
 function General:load()
-	self.data = NPC:init(2,2,"BRUH","General",{166,76,92})
+	self.data = NPC:init("BRUH","General",{166,76,92})
 end
 
-function General:draw()
+function General:draw(x,y)
 	love.graphics.setColor(love.math.colorFromBytes(self.data.color))
-	love.graphics.print('/', self.data.x * Game.scale, self.data.y * Game.scale)
+	love.graphics.print('/', x * Game.scale, y * Game.scale)
 end

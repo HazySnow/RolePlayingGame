@@ -11,5 +11,5 @@ function Room_3:load()
 	}
 	self.width = 6
 	self.height = 6
-	self.npc_list = {}
+	self.npc = {}
 end
