@@ -114,6 +114,7 @@ function Player:keypressed(key)
 			end
 		end
 	end
+
 end
 
 function love.keypressed(key)

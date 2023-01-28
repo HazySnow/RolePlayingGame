@@ -10,20 +10,24 @@ function NPC:init(name,x,y,color,char,dialogue)
 	self.char = char
 	self.dialogue = dialogue
 	self.interacting = false
+
 end
 
 function NPC:draw()
+	local font = love.graphics.getFont()
+	local font_width = font:getWidth(self.dialogue)
+	local font_height = font:getHeight(self.dialogue)
+	local padding = 8
+	local box_x = (Game.width / 2) - (font_width / 2)
+	local box_y = ((Game.height - 20) - (font_height / 8))
 	love.graphics.setColor(love.math.colorFromBytes(self.color))
 	love.graphics.print(self.char, self.x * Game.scale, self.y * Game.scale)
 
 	if self.interacting then
-		love.graphics.setColor(1,1,1,1)
-		if str ~= self.dialogue then
-			for i = 1, #str do
-				local c = str:sub(1,i)
-				love.graphics.print(c, (1280/2), (720/2))
-			end
-		end
+		love.graphics.setColor(1,1,1,100)
+		love.graphics.rectangle('fill', box_x - padding, Game.height - 20, font_width + (padding * 2), font_height)
+		love.graphics.setColor(love.math.colorFromBytes(self.color))
+		love.graphics.print(self.dialogue, (Game.width / 2) - (font_width / 2), Game.height - 20)
 	end
 end
 

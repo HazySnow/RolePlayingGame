@@ -1,5 +1,4 @@
 Class = require 'lib/30log'
-Moan = require 'lib/Moan'
 
 require 'player'
 require 'world/init'
@@ -16,6 +15,8 @@ function love.load()
 	Game.currentRoomX = 2
 	Game.currentRoomY = 1
 	Game.scale = 15
+	Game.width = 1280
+	Game.height = 720
 	Player:load()	
 end
 
