@@ -1,4 +1,5 @@
 Class = require 'lib/30log'
+Moan = require 'lib/Moan'
 
 require 'player'
 require 'world/init'
@@ -37,7 +38,6 @@ end
 
 function drawing_world(room,x,y,room_map)
 	-- Setting colors
-	local wall = {78,136,173}
 	
 	
 	-- Draw the current Room
@@ -50,5 +50,4 @@ function drawing_world(room,x,y,room_map)
 	for i,v in ipairs(room_map.npc) do
 		v:draw()
 	end
-
 end

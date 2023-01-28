@@ -1,5 +1,7 @@
 NPC = Class()
 
+local str = ""
+
 function NPC:init(name,x,y,color,char,dialogue)
 	self.name = name
 	self.x = x
@@ -16,7 +18,12 @@ function NPC:draw()
 
 	if self.interacting then
 		love.graphics.setColor(1,1,1,1)
-		love.graphics.print(self.dialogue, (1280/2), (720/2))
+		if str ~= self.dialogue then
+			for i = 1, #str do
+				local c = str:sub(1,i)
+				love.graphics.print(c, (1280/2), (720/2))
+			end
+		end
 	end
 end
 

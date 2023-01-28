@@ -16,6 +16,7 @@ end
 
 function Player:door_transition(room_width, room_height, xvel, yvel)
 	-- If player is moving right then place player on left side of next room
+
 	if (xvel == 1) then
 		Game.currentRoomX = Game.currentRoomX + 1
 		self.x = 2
@@ -113,7 +114,6 @@ function Player:keypressed(key)
 			end
 		end
 	end
-	
 end
 
 function love.keypressed(key)
